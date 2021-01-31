@@ -1,21 +1,32 @@
 public class BuscaBinaria {
 
   public int busca(int[] array, int chave) {
-    int i = -1;
-    int a = 0;
-    int b = array.length;
+    int indiceEncontrado = -1;
+    int posicaoAtual = 0;
+    int tamanhoArray = array.length - 1;
 
-    while(a <= b) {
-      int meio = (a +b) / 2;
-      if(array[meio] < chave) {
-        a = meio + 1;
-      } else if(array[meio] > chave) {
-        b = meio - 1;
-      } else if(array[meio] == chave) {
-        i = meio;
+    while(posicaoAtual <= tamanhoArray) {
+      try {
+        int meio = (posicaoAtual +tamanhoArray) / 2;
+
+        if(array[meio] < chave) {
+          posicaoAtual = meio + 1;
+        }
+
+        else if(array[meio] > chave) {
+          tamanhoArray = meio - 1;
+        }
+
+        else if(array[meio] == chave) {
+          indiceEncontrado = meio;
+          break;
+        }
+      }
+
+      catch (ArrayIndexOutOfBoundsException error) {
         break;
       }
     }
-    return i;  
+    return indiceEncontrado;
   }
 }
